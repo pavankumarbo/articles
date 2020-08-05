@@ -1,0 +1,6 @@
+import torch
+
+torch.ones((n,m))
+torch,eye((n,m))
+torch.mul
+torch.matmul
