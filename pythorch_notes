@@ -4,5 +4,10 @@ torch.ones((n,m))
 torch,eye((n,m))
 torch.mul
 torch.matmul
-torch.nn.loss.crossentropy
+torch.nn.CrossEntropyLoss
 torch.nn.ReLu
+torch.utils.data
+torchvision.transforms
+transform = transforms.Compose(transforms.ToTensor(),transforms.normalize((mean),((std))))
+loader = torch.utils.data.DataLoader(dataset,shuffle,batch_size,transform=)
+
