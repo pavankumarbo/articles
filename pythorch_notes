@@ -4,3 +4,5 @@ torch.ones((n,m))
 torch,eye((n,m))
 torch.mul
 torch.matmul
+torch.nn.loss.crossentropy
+torch.nn.ReLu
