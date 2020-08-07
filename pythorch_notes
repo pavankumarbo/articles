@@ -10,4 +10,8 @@ torch.utils.data
 torchvision.transforms
 transform = transforms.Compose(transforms.ToTensor(),transforms.normalize((mean),((std))))
 loader = torch.utils.data.DataLoader(dataset,shuffle,batch_size,transform=)
+optimizer = nn.Adam(model.parameters(),lr=)
+optimizer.zero_grad()
+optimizer.step()
+loss.backward()
 
