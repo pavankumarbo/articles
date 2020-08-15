@@ -1,0 +1,35 @@
+spark3:
+-gpu
+- cipher as sql for graph network
+- graphx graph processing
+- python spark streaming
+- deltalake as datalake support for amazon s3 etc
+- dataframe based mllib instead of rdd based mllib
+ - kubernetes integration
+
+RDD:
+- sc.textFile() [ 's3:///','file:///','hdfs:///']
+- sc.parallelize([1,2,3,4])
+- hivectx = HiveContext(sc) -> hivectx.sql('SELECT * FROM x')
+- can also be created from cassandra, jdbc, hbase, elastic search, json, csv, object files etc
+
+Basic rdd functions:
+- collect(), count(), take(), countByValue(), top(), reduce(), take()
+- map()[ex: rdd.map(lambda x : x**2)], flatMap(),filter(),distinct(),union(),intersections(),cartesian(),subtract()
+
+Basic script:
+from pyspark import SparkConf, SparkContext
+import collections
+
+conf = SparkConf.setMaster('local').setAppname('RatingsHistogram')
+sc = SparkContext(conf=conf)
+lines = sc.textFile('file:///textfile_loc')
+ratings = lines.map(lambda x: x.split()[2]). [Note: This is note inplace modification, the map function creaters a new rdd so needs to be assigned to a variable]
+result = ratings.countByValue()
+sortedresults = collections..orderedDict(sorted(results.items()))
+
+Key-value RDD:
+
+
+
+
