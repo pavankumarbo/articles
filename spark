@@ -14,7 +14,7 @@ RDD:
 - can also be created from cassandra, jdbc, hbase, elastic search, json, csv, object files etc
 
 Basic rdd functions:
-- collect(), count(), take(), countByValue(), top(), reduce(), take()
+- collect(), count(), take(), countByValue(), top(), reduce()
 - map()[ex: rdd.map(lambda x : x**2)], flatMap(),filter(),distinct(),union(),intersections(),cartesian(),subtract()
 
 Basic script:
@@ -26,10 +26,23 @@ sc = SparkContext(conf=conf)
 lines = sc.textFile('file:///textfile_loc')
 ratings = lines.map(lambda x: x.split()[2]). [Note: This is note inplace modification, the map function creaters a new rdd so needs to be assigned to a variable]
 result = ratings.countByValue()
-sortedresults = collections..orderedDict(sorted(results.items()))
+sortedresults = collections.orderedDict(sorted(results.items()))
 
 Key-value RDD:
+- reduceByKey()[rdd.reduceByKey(lambda x,y: x+y)][here x and y are values of each key],groupByKey(),sortByKey(),keys(),values()
+- 
+- If we are not modifying keys, use mapValues(),flatMapValues() instead of map and flatMap(), to avoid shuffling and speeding up the query.
+- 
 
+Filtering:
+- rdd.filter(lambda x : x[2]=='MIN')
+
+FlatMap;
+- map for just modifying the existing keys to different version in values, flat map can create more elements from single source[ex: rdd.flatMap(lambda line: line.split())]
+SortByValues:
+- flip - rdd.map(lambda (x,y) : (y,x))
+
+rdd.lookup(val)
 
 
 
