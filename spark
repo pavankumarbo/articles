@@ -44,5 +44,20 @@ SortByValues:
 
 rdd.lookup(val)
 
+Accumulators
+
+- used to maintain global counter
+- sc.accumulator(0)
+
+Caching
+- .cache() to cache in memory
+- .persist() to store it in the disk
+
+Set Multiple cores
+- .setMaster("local[*]").setAppname('test')
+
+
+
+
 
 
