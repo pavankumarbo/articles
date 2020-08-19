@@ -56,6 +56,12 @@ Caching
 Set Multiple cores
 - .setMaster("local[*]").setAppname('test')
 
+PartitionBy
+
+- join(),cogroup(),leftOuterJoin(),rightOuterJoin(),combineByKey(),lookup(),groupByKey()
+- .partitionBy(1000)
+
+
 
 
 
