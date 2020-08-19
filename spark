@@ -87,10 +87,48 @@ myresultDF.groupBy(myresultDF('filed1')).mean()
 myresultDF.rdd().map(mapfunction)
 
 dataframe is dataset of row objects
-start sparksql using
 
 userdefined functions in sparksql
 hiveCtx.registerFunction('funcname',lambda func,IntegerType())
+
+sparksql syntax:
+instead of config,  import SparkSession
+form spark.sql import Row,SparkSession
+sp = spark.builder.AppName.getOrCreate()
+sp.SparkContext.TextFile('')
+sp.createDataFrame(mapped_row_data).cache()
+sp.createOrReplaceTempView('temp_people')
+s = sp.sql('SELECT * FROM temp_people')
+instead of sql:
+s.groupBy('age').count().orderBy('age').show()
+
+¶ DataFrame,wwhich is a higher level api is faster than rdd
+¶ sparksession.stop() //important
+
+
+MLLIB:
+
+- vector(sparser or dense), labeledPoint, Rating
+- Vectors.desne(float(i))
+- mapper_rdd.toDf(col_list)
+
+streaming
+-ssc = StreamingContext(sc,1)
+- l = ssc.textFileStream('books')
+= c= l.flatMap(mapfunc)
+- ssc.start() and ssc.awaitTermination(). //important
+- window(),reduceByWindow(), reduceByKeyAndWindow()
+- updataStateByKey() [for maintaing running count etc]
+- new integration of streaming with dataframe
+
+
+- ss.readStream.text('logs')
+
+
+GraphX
+- only on scala
+- useful for network analysis in scala,provided VecgtorRDDand EdgeRDD
+
 
 
 
