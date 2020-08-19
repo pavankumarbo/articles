@@ -61,6 +61,38 @@ PartitionBy
 - join(),cogroup(),leftOuterJoin(),rightOuterJoin(),combineByKey(),lookup(),groupByKey()
 - .partitionBy(1000)
 
+EMR spark:
+
+- spark-submit --exercutor-memory 1g MovieSimilarities1M.py 260 (to change the default memory from 512MB to 1 Gb)
+
+Troubleshootin of spark on cluster:
+- Usually if error is not clear, need to try increasing memory, number of clusters
+- on local clusters, ui runs on port 4040
+- Try to avoid obscure external python packages, because for spark to understand those libraries,
+.py files should be passed through spark-submit and also should setup a step in EMR with pip install packages
+- when executer is failing heartbeat etc, try to manage partitions using .partitionby() or increase the machines
+
+
+Spark-SQL
+
+from pyspark.sql impor SQLContext, Row
+hiveCotext = HiveContext(sc)
+inputData= spark.read.json(jsonfilepath)
+inputData.createOrReplaceTempView('tempname')
+myresultdf = hiveContext.sql('SELECT blah FROm blahblah ORDER BY blahblah')
+myresltDF.show()
+myresultDF.select('field1')
+myresultDF.filter(myresultDF('filed1')>100)
+myresultDF.groupBy(myresultDF('filed1')).mean()
+myresultDF.rdd().map(mapfunction)
+
+dataframe is dataset of row objects
+start sparksql using
+
+userdefined functions in sparksql
+hiveCtx.registerFunction('funcname',lambda func,IntegerType())
+
+
 
 
 
