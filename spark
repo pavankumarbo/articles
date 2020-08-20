@@ -131,6 +131,14 @@ GraphX
 
 
 
+DATA CLEANING USING PYSPARK
+
+- Define schema using StructType([StructField('Name'),StringType,True],[StructField(field_name),DataType(),Null_or_not])
+- Spark objects are immutable(like rdds) for the purpose of sharing the object across clusters, so no in place operations are allowed,
+result of object modifications should be assigned to new objects
+- 
+
+
 
 
 
