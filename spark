@@ -136,6 +136,37 @@ DATA CLEANING USING PYSPARK
 - Define schema using StructType([StructField('Name'),StringType,True],[StructField(field_name),DataType(),Null_or_not])
 - Spark objects are immutable(like rdds) for the purpose of sharing the object across clusters, so no in place operations are allowed,
 result of object modifications should be assigned to new objects
+- df.explain()
+- df.drop(df(col_name))
+- spark.read.format('parquet').load()
+- df.write.format('parquet').save('file_name')
+- df.filter(df.data>'1/1/2019') or df.where()
+- df.select('col_name')
+- df.withColumn('new_col',df.new_col)
+- df.filter(df.col.isNotNull())
+- df.where(~ df.col.isNull())
+- df.where(df.col.contains('col_value'))
+- import pyspark.sql.functions as F [F.lower(),F.split('col_name','-'),F.col.cast(IntegerType())]
+- ArrayType().size(col), ArrayType().getItem(index)
+- func_var = F.udf(func,resturnType()) => funcVar(df.column)
+- pyspark.sql.functions.monotonically_increasing_id(). || voter_df_single = voter_df_single.withColumn('ROW_ID', F.monotonically_increasing_id())
+- voter_df_single.orderBy(voter_df_single.ROW_ID.desc()).show(10)
+- voter_df_single.rdd.getNumPartitions()
+
+
+Improving performance:
+- .cache() // stop caching after finished //df.cache().count()
+- .isCached()
+- driver process/ worker process
+- have well defined schema to spead up file read
+- many small files are better than having one big file
+- use. wild cards in import sp.read.csv('*.csv')
+- spark.conf.set('configuration_name') // spark.conf.get('configuration name')
+- Cluster Types - 1) single node 2) standalone(with separate drivers etc), 3) managed(yarn, kubernetes, mesos)
+- driver program responsible for shared code access, consolidating results, task assignment. assign twice memory to driver than worker node
+- worker runs tasks assigned by driver. more worker nodes is better than larger nodes. balance with costs. fast ssd local storage is better.
+- use coalesce(number_of_repartitions) instead of repartition(number of partitions)
+- .join often does shuffling, to avoidn this you can use broadcast variables[spark.sql.broadcast()] [use when one df is much smaller]
 - 
 
 
