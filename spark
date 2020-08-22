@@ -189,7 +189,15 @@ MLLIB:
 - pipeline().set_stages()
 - paramgridbuilder()
 MLLIB datatypes:
-- 
+- local vector - 0 based index and double type values, two types dense and sparse vectors.
+- dense vecotr - numpy arrays and python arrays are recognised as dense vectors in spark
+- sparse vector contains two arrays, one arrqay of indexes and one array for values, most of the values are zeroes
+- sparsevector(4,[0,2],[0.1,0.2]) will produce array [0.1,0,0,0.2]
+- LabeledPointr -  a localvector dense or sparse used in supervosed learning containing double numbers as labels of multi class and 0,1 labels for binary class
+- Matrices.sparse(row_num,col_num,(row_indices),(col_indices),(actual)values))
+- distributed matrix - long row and col indices, double values, stored in rdds. ex: row matrix(rdd of sequence of vectors without row indices),
+indexedrow matrix(like row matrix with meaningfull indices), coordinate matrix(IndexedRow(row_index,col_index,value)), block matrix(row_index,col)index,value)
+- local matrix - sparse matrix, dense matrix
 
 
 
