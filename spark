@@ -143,10 +143,12 @@ result of object modifications should be assigned to new objects
 - df.filter(df.data>'1/1/2019') or df.where()
 - df.select('col_name')
 - df.withColumn('new_col',df.new_col)
+- df.withrenamedColumn(.,.)
 - df.filter(df.col.isNotNull())
 - df.where(~ df.col.isNull())
 - df.where(df.col.contains('col_value'))
 - import pyspark.sql.functions as F [F.lower(),F.split('col_name','-'),F.col.cast(IntegerType())]
+- with select and withcolumn can directly pass column name to F.udf() inside arguments instead of passing df['col_name']
 - ArrayType().size(col), ArrayType().getItem(index)
 - func_var = F.udf(func,resturnType()) => funcVar(df.column)
 - pyspark.sql.functions.monotonically_increasing_id(). || voter_df_single = voter_df_single.withColumn('ROW_ID', F.monotonically_increasing_id())
@@ -156,7 +158,8 @@ result of object modifications should be assigned to new objects
 
 Improving performance:
 - .cache() // stop caching after finished //df.cache().count()
-- .isCached()
+- .is_cached()
+- .unpersist() [to uncache]
 - driver process/ worker process
 - have well defined schema to spead up file read
 - many small files are better than having one big file
@@ -166,11 +169,27 @@ Improving performance:
 - driver program responsible for shared code access, consolidating results, task assignment. assign twice memory to driver than worker node
 - worker runs tasks assigned by driver. more worker nodes is better than larger nodes. balance with costs. fast ssd local storage is better.
 - use coalesce(number_of_repartitions) instead of repartition(number of partitions)
-- .join often does shuffling, to avoidn this you can use broadcast variables[spark.sql.broadcast()] [use when one df is much smaller]
+- .join often does shuffling, to avoidn this you can use broadcast variables[spark.sql.broadcast()] [use when one df is much smaller][joined_df = split_df.join(broadcast(valid_folders_df), "folder")]
+- broadcast_df = flights_df.join(broadcast(airports_df),flights_df["Destination Airport"] == airports_df["IATA"] )
 - 
 
 
+Pipelines: 
+- pipeline stages - > inputs, transformations, outputs , validations, analysis
+- Issues to solve : Multiple values in single col, different delimiters(use sep=','), empty rows(automatically removed), commented lines(pass comment argument,comment='#'), headers(headers=True)
+- change stringtypes to intypes using .cast(IntegerType())
+- validatind - verify row/column count, data types of coluimn
+- validate via join with smaller df
+- udfs used for data manipulation are slower, to avoid this sijple calculations should be inline
 
+
+MLLIB:
+- Algos(classification, regression, ), pipeline(constructing, tuning, persistence), feature(extractions, transdformation), utilities(linear algebra, statistics)
+- transformer -> estimator -> Evaluator/class_validator
+- pipeline().set_stages()
+- paramgridbuilder()
+MLLIB datatypes:
+- 
 
 
 
