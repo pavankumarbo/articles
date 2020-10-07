@@ -1,0 +1,43 @@
+- In memory processing for large datasets
+- RDD API- spark core
+- SPark SQL - library for processing structured and semi structured data
+- SPark MLLIB - for machine learning algorithms
+- Spark streaming
+
+- spark context - entry point where control is transferring from OS to program.
+- sc.version - 2.3.1
+- sc.PythonVer - 3.7
+- sc.master
+- sc.parallelize([])
+- sc.textFile([])
+
+
+- lambda - anonymous functions . useful in map and filter. only one expression is contained and is returned ex: lambda x : x+1
+- map(lambda func, list) - appliest lambda func to all list items and list(map) gives a new list
+- filter(lmabda func, list)- applies filter func to all items in the list and a new list is returned.
+
+
+- RDD - resilient(resistant to failure), distributed(over multiple nodes and executors) , dataset(set, arrays,tuples etc)
+- load from hdfs, s3, text file etc
+- patrtition - logical division of dataset. by default spark creates partition based on available nodes.
+- sc.textFile(minPartitions = ) . df.getNumPartitions() for getting partititons
+
+
+- rdd.map() - transform each element using the lambda func and return new rdd
+- rdd.filter()- filter each element using the lambda func and return new rdd
+- rdd.flatMap()- transform multiple data sets and return single iterator
+- rdd.take(n) - return n elements from the rdd
+- rdd.collect()- return all elements from the rdd
+- rdd1.union(rdd2).collect() - union two rdds
+
+
+- pairrdds- create by returning tuple of values.containes key and value but all same as rdd
+- pairRDD.reduceByKey(lambda x,y: x+y) - for matching keys returns tuple (key,sum of all x and y for that key)
+- parRdd.sortByKey()- 
+- pairRdd.groupByKey().collect() - return (key, list of values for that key)
+- pairRdd1.join(pairRdd2).collect() - join based on key - returns (key, tuple of values for that key) 
+
+- rdd.saveAsTextFile() - use instead of colelct,because collect takes lot of memory.
+-- rdd.coalesce(1).saveAsTextFile() - returns the rdd
+- countAsKey()- use only on small datasets
+- collectAsMap() - returns key value paris in pairrdd as a dictionary, use it only on small dataset
