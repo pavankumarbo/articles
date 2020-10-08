@@ -67,3 +67,10 @@ MLLIB
 - Collaborative filtering - ALS algorithm
 - Clustering - 
 - Classification - 
+
+- rdd.rqandomSplit()
+- LabeledVector()
+- DenseVector()
+- SparseVector()
+- hashingTF() - term frequency
+- 
