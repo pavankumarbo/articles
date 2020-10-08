@@ -61,3 +61,9 @@
 
 - handyspark for data visualization
 - spark_df.toPandas()
+
+
+MLLIB
+- Collaborative filtering - ALS algorithm
+- Clustering - 
+- Classification - 
