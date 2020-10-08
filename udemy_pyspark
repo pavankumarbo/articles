@@ -41,3 +41,23 @@
 -- rdd.coalesce(1).saveAsTextFile() - returns the rdd
 - countAsKey()- use only on small datasets
 - collectAsMap() - returns key value paris in pairrdd as a dictionary, use it only on small dataset
+
+- dataframe - immutable distributed colelction of structured(sql tables) and semistructired data(json etc). provided by sql api, sql queries can be written.
+- spark.read - for reading into a dataframe - spark.read.csv('filepath',header=True,inferSchema=True)
+
+
+- dataframe manipulation contains transformations and actions
+- transformations - select, filter, groupby,orderby,dropDuplicates(), withColumnRenamed()
+- actions - printSchema,head,count,columns, describe(), 
+- .printschema() - prints the datatypes of columns
+- .columns() - prints all column names
+- .describe() is used to calculate summary statistics of all numerical attributes
+- .count() - counts number of rows
+- .dropDuplicates() - to drop dupliocate rows()
+
+- df.createOrReplaceTempView("people")
+- spark.sql('select * from people')
+
+
+- handyspark for data visualization
+- spark_df.toPandas()
