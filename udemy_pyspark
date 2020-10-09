@@ -73,4 +73,16 @@ MLLIB
 - DenseVector()
 - SparseVector()
 - hashingTF() - term frequency
+
+
+
+DATA CLEANING:
+- clean for performance , organized data flow
+- StructType([StructField('name',StringType(), True), StructField('name',IntegeraType(), True)]).  (import * from pyspark.sql.types)
+- spark objects are immutable. meaning defined once, unable to be directly modified, component of functional programming, recreated if reassigned.
+- aa_dfw_df = spark.read.format('csv').options(Header=True).load('AA_DFW_2018.csv.gz')
+- issues with csv- schema is not well defined, escape characters, encoding, cannoit be filteresd using predicate pushdown
+- paraquet - schema stored internally,columnar data format, support predicate pushdown
+- df.write.parquet('AA_DFW_ALL.parquet', mode='overwrite')
+- spark.read.parquet
 - 
